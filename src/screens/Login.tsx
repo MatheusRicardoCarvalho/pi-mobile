@@ -10,13 +10,17 @@ export default function Login({ navigation }: any) {
     const [password, setPassword] = useState('');
     const authContext = useContext(AuthContext)
     const signed = authContext?.signed
+    const linkTo = useLinkTo();
 
     const handleSingIn = async () => {
         await authContext?.signIn(email, password)
     }
     if (signed) {
-        const linkTo = useLinkTo();
-        linkTo('Home')
+        linkTo('/Home')
+        //navigation.navigate('Home')
+        return (
+            <Title>Aguarde</Title>
+        );
     } else {
         return (
             <Body>

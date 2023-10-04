@@ -61,7 +61,7 @@ interface User {
       removeValue("@Auth:token")
       removeValue("@Auth:user")
       setUser(null);
-      linkTo("/")
+      linkTo("../screens/Login.tsx")
       //return <Navigate to="/" />;
     };
   

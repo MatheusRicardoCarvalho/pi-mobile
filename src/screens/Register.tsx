@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Body, ButtonTouch, ContainerLogin, Title, StyledText, ContainerForm, Label, Input } from "../styleds/home";
 import { api } from "../services/api";
 import { useLinkTo } from "@react-navigation/native";
+import axios from "axios";
 
 export default function Register({navigation}: any) {
     const [name, setName] = useState('');
@@ -9,14 +10,20 @@ export default function Register({navigation}: any) {
     const [telefone, setTelefone] = useState('');
     const [nascimento, setNascimento] = useState('');
     const [password, setPassword] = useState('');
+    const linkTo = useLinkTo();
 
     const handleSubmit = async () => {
-        const linkTo = useLinkTo();
         const data = { name, email, password, userType: "tenantUser" }
         console.log("datazin antes: " + name + email + password)
-        const response = await api.post('/users/create', data)
-        console.log(response.data)
-        linkTo("/Home")
+        try{
+
+            const response = await api.post('/users/create', data)
+            //const response = await axios.post('http://localhost:3333/users', data)
+            console.log(response.data)
+            linkTo("/tenantUser/Home.tsx")
+        }catch(err){
+            console.log(err);
+        }
         //navigation.navigate('/');
     }
     return (

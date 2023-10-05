@@ -28,6 +28,8 @@ interface User {
   
   export const AuthProvider = ({ children }: AuthProviderProps) => {
     const [user, setUser] = useState<User | null>(null);
+    const linkTo = useLinkTo();
+
     useEffect(() => {
       const loadingStoredData = async () => {
         const storageUser =  await getData("@Auth:user");
@@ -57,11 +59,10 @@ interface User {
     };
     const signOut = () => {
       //const navigation = useNavigation();
-      const linkTo = useLinkTo();
       removeValue("@Auth:token")
       removeValue("@Auth:user")
       setUser(null);
-      linkTo("../screens/Login.tsx")
+      //linkTo("../screens/Login.tsx")
       //return <Navigate to="/" />;
     };
   

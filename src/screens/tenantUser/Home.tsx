@@ -1,10 +1,18 @@
-import { Body } from "../../styleds/home";
+import React, { useContext, useEffect, useState } from "react";
+import { Body, ButtonTouch, StyledText, Title } from "../../styleds/home";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Home() {
+    const authContext = useContext(AuthContext);
 
-    return(
+    const handlesignOut = () => {
+        authContext?.signOut();
+
+    }
+    return (
         <Body>
-            <h1>TESTE</h1>
+            <Title>estamos logados</Title>
+            <ButtonTouch onPress={handlesignOut}><StyledText>Deslogar</StyledText></ButtonTouch>
         </Body>
     )
 }

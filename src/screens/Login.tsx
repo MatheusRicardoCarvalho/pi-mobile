@@ -1,8 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { Body, ButtonTouch, ContainerLogin, Title, StyledText, ContainerForm, Label, Input } from "../styleds/home";
 import { AuthContext } from "../context/AuthContext";
-import { useLinkTo } from "@react-navigation/native";
 
 
 export default function Login({ navigation }: any) {
@@ -10,16 +9,19 @@ export default function Login({ navigation }: any) {
     const [password, setPassword] = useState('');
     const authContext = useContext(AuthContext)
     const signed = authContext?.signed
-    const linkTo = useLinkTo();
+
+    /*useEffect(() => {
+        authContext?.signOut();
+        
+    }, [])*/
 
     const handleSingIn = async () => {
         await authContext?.signIn(email, password)
     }
     if (signed) {
-        linkTo('/Home')
-        //navigation.navigate('Home')
+        navigation.navigate('Home', {screen: 'Home'})
         return (
-            <Title>Aguarde</Title>
+            <Title>Indo para o Home</Title>
         );
     } else {
         return (

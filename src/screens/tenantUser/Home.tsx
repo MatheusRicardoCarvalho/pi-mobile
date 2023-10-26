@@ -13,6 +13,7 @@ export default function Home() {
         <Body>
             <Title>estamos logados</Title>
             <ButtonTouch onPress={handlesignOut}><StyledText>Deslogar</StyledText></ButtonTouch>
+            
         </Body>
     )
 }

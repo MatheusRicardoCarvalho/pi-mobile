@@ -16,6 +16,7 @@ font-weight: bold;
 text-align: center;
 `
 
+
 export const ContainerLogin = styled.View`
 display: flex;
 height: 82%;

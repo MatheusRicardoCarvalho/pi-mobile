@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Body, ButtonTouch, ContainerLogin, Title, StyledText, ContainerForm, Label, Input } from "../styleds/home";
 import { api } from "../services/api";
 import { useLinkTo } from "@react-navigation/native";
-import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
 
-export default function Register({navigation}: any) {
+export default function Register() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [telefone, setTelefone] = useState('');
     const [nascimento, setNascimento] = useState('');
     const [password, setPassword] = useState('');
     const linkTo = useLinkTo();
+    const authContext = useContext(AuthContext)
 
     const handleSubmit = async () => {
         const data = { name, email, password, userType: "tenantUser" }
@@ -18,13 +19,13 @@ export default function Register({navigation}: any) {
         try{
 
             const response = await api.post('/users/create', data)
-            //const response = await axios.post('http://localhost:3333/users', data)
             console.log(response.data)
-            linkTo("/tenantUser/Home.tsx")
+            await authContext?.signIn(email, password)
+
+            linkTo("/Home")
         }catch(err){
             console.log(err);
         }
-        //navigation.navigate('/');
     }
     return (
         <Body>

@@ -15,9 +15,7 @@ export default function Register() {
 
     const handleSubmit = async () => {
         const data = { name, email, password, userType: "tenantUser" }
-        console.log("datazin antes: " + name + email + password)
         try{
-
             const response = await api.post('/users/create', data)
             console.log(response.data)
             await authContext?.signIn(email, password)

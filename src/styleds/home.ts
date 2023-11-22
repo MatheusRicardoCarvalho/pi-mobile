@@ -28,6 +28,33 @@ border-radius: 40px 40px 0px 0px;
 background-color: #1A0D30;
 row-gap: 8px;
 `
+
+export const ContainerEdit = styled.View`
+flex: 1;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+border-radius: 40px 40px 0px 0px;
+background-color: #1A0D30;
+`
+export const StyledImage = styled.Image`
+width: 100px;
+height: 100px;
+`;
+
+export const StyledScrollView = styled.ScrollView.attrs(() => ({
+  contentContainerStyle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+}))`
+`
+export const ScrollViewContainer = styled.View`
+height: 82%;
+width: 100%;
+
+`
+
 export const ButtonTouch = styled.TouchableOpacity`
 width: 50%;
   padding: 8px 22px;
@@ -42,9 +69,13 @@ text-align: center;
 `
 
 export const ContainerForm = styled.View`
-height: 70%;
+//height: 70%;
 width: 80%;
 `;
+
+export const FormScrollView = styled(ContainerForm)`
+//height: 100%;
+`
 
 export const Label = styled.Text`
   font-size: 16px;
@@ -65,4 +96,8 @@ export const Input = styled.TextInput`
   margin-bottom: 4%;
   padding: 0 8px;
 `;
+
+export const InputScroll = styled(Input)`
+height: 60px;
+`
 

@@ -1,22 +1,27 @@
 import React, { ReactNode, createContext, useState, useEffect } from "react";
 import { api } from "../services/api";
-import { useLinkTo } from "@react-navigation/native";
+import { useLinkTo, useNavigation } from "@react-navigation/native";
 import { MMKV } from "react-native-mmkv";
 import { getData, removeValue, storeData } from "../services/storage";
 //import { storage } from "../services/storage";
-
-interface User {
+// id, name, email, gender, birthday, city, photo, phone
+export interface User {
     id: string;
+    name: string;
     email: string;
-    userType: string;
-    name: string
+    gender: string;
+    birthday: string;
+    city: string;
+    photo: string;
+    phone: string
   }
   
   export interface AuthContextType {
     user: User | null;
     signed: boolean;
     signIn: (email: string, password: string) => Promise<void>;
-    signOut: () => void
+    signOut: () => void;
+    updateUser: (user: User) => void
   }
   
   interface AuthProviderProps {
@@ -28,8 +33,8 @@ interface User {
   
   export const AuthProvider = ({ children }: AuthProviderProps) => {
     const [user, setUser] = useState<User | null>(null);
-    const linkTo = useLinkTo();
-
+    //const linkTo = useLinkTo();
+    //const navigation = useNavigation()
     useEffect(() => {
       const loadingStoredData = async () => {
         const storageUser =  await getData("@Auth:user");
@@ -62,17 +67,21 @@ interface User {
       removeValue("@Auth:token")
       removeValue("@Auth:user")
       setUser(null);
-      linkTo("/Login")
-      //return <Navigate to="/" />;
     };
-  
+    
+    const updateUser = async (newData: User) => {
+      setUser(newData)
+      await storeData("@Auth:user", JSON.stringify(newData));
+    }
+
     return (
       <AuthContext.Provider
         value={{
           user,
           signed: !!user,
           signIn,
-          signOut
+          signOut,
+          updateUser
         }}
       >
         {children}

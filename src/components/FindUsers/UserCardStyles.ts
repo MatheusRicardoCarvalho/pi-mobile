@@ -2,6 +2,7 @@ import styled from "styled-components/native";
 
 export const UserCard = styled.View`
   width: 90%;
+  align-self: center;
   background-color: #fff;
   border-radius: 10px;
   padding: 20px;
@@ -44,3 +45,16 @@ export const UserCity = styled.Text`
   color: #666;
 `;
 
+export const UserButton = styled.TouchableOpacity`
+  width: 90%;
+  background-color: #32234D;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px;
+  align-items: center;
+`;
+
+export const ButtonText = styled.Text`
+  font-size: 20px;
+  color: #fff;
+`;

@@ -1,3 +1,4 @@
+import { FlatList } from "react-native";
 import styled from "styled-components/native";
 
 export const Body = styled.View`
@@ -31,6 +32,7 @@ row-gap: 8px;
 
 export const ContainerEdit = styled.View`
 flex: 1;
+width: 100%;
 flex-direction: column;
 justify-content: center;
 align-items: center;
@@ -49,10 +51,17 @@ export const StyledScrollView = styled.ScrollView.attrs(() => ({
   },
 }))`
 `
+
+
+export const StyledFlatList = styled.FlatList.attrs({
+  contentContainerStyle: {
+  },
+})`` as unknown as typeof FlatList;
+
+
 export const ScrollViewContainer = styled.View`
 height: 82%;
 width: 100%;
-
 `
 
 export const ButtonTouch = styled.TouchableOpacity`

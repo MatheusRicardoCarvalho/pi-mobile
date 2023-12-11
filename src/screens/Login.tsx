@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { Body, ButtonTouch, ContainerLogin, Title, StyledText, ContainerForm, Label, Input } from "../styleds/home";
 import { AuthContext } from "../context/AuthContext";
+import { navigate } from "../routes/RootNavigation";
 
 
 export default function Login({ navigation }: any) {
@@ -19,7 +20,8 @@ export default function Login({ navigation }: any) {
         await authContext?.signIn(email, password)
     }
     if (signed) {
-        navigation.navigate('Home', {screen: 'Home'})
+        //navigation.navigate('Home', {screen: 'Home'})
+        navigate('Home', {})
         return (
             <Title>Indo para o Home</Title>
         );

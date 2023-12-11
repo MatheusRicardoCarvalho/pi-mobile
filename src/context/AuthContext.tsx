@@ -3,6 +3,7 @@ import { api } from "../services/api";
 import { useLinkTo, useNavigation } from "@react-navigation/native";
 import { MMKV } from "react-native-mmkv";
 import { getData, removeValue, storeData } from "../services/storage";
+import { navigate } from "../routes/RootNavigation";
 //import { storage } from "../services/storage";
 // id, name, email, gender, birthday, city, photo, phone
 export interface User {
@@ -13,6 +14,7 @@ export interface User {
     birthday: string;
     city: string;
     photo: string;
+    aboutMe: string;
     phone: string
   }
   
@@ -63,7 +65,7 @@ export interface User {
       }
     };
     const signOut = () => {
-      //const navigation = useNavigation();
+      navigate("Login", {})
       removeValue("@Auth:token")
       removeValue("@Auth:user")
       setUser(null);

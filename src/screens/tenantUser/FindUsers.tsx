@@ -1,10 +1,13 @@
-import { useContext, useEffect, useLayoutEffect, useState } from "react";
+import { useContext, useState } from "react";
+import { useFocusEffect } from '@react-navigation/native';
 import { AuthContext } from "../../context/AuthContext";
-import { Body, Title, ButtonTouch, StyledText, ScrollViewContainer, StyledScrollView } from "../../styleds/home";
-import UserCardComponent from "../../components/FindUsers/UserCardComponent";
+import { Body, Title, ButtonTouch, StyledText, ScrollViewContainer, StyledScrollView, StyledFlatList } from "../../styleds/home";
+import {UserCardComponent} from "../../components/FindUsers/UserCardComponent";
 import { User } from "../../context/AuthContext";
 import { api } from "../../services/api";
 import { ContainerFindUser } from "../../styleds/find_users";
+import React from "react";
+import { FlatList } from "react-native";
 
 export interface ArrayUsers {
     users: User[]
@@ -14,9 +17,11 @@ export default function FindUsers() {
     const authContext = useContext(AuthContext);
     const [arrayUsers, setArrayUsers] = useState<ArrayUsers | null>(null)
 
-    useLayoutEffect(() => {
-        initArrayUsers()
-    }, [])
+    useFocusEffect(
+        React.useCallback(() => {
+            initArrayUsers()
+        }, [])
+    )
 
     async function initArrayUsers() {
         try {
@@ -27,27 +32,21 @@ export default function FindUsers() {
             console.log("erro ao buscar usuários: " + err)
         }
     }
-    
-
-
-
 
     const handlesignOut = () => {
         authContext?.signOut();
-
     }
+
     return (
         <>
             <Title>Outros Usuários</Title>
             <ContainerFindUser>
                 <ScrollViewContainer>
-                    <StyledScrollView>
-                        {
-                            arrayUsers?.users.map((user, index) => {
-                                return <UserCardComponent key={index} user={user} />
-                            })
-                        }
-                    </StyledScrollView>
+                    <StyledFlatList
+                        data={arrayUsers?.users}
+                        keyExtractor={(item, index) => index.toString()}
+                        renderItem={({ item }) => <UserCardComponent user={item} />}
+                    />
                 </ScrollViewContainer>
             </ContainerFindUser>
         </>

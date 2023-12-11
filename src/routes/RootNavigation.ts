@@ -1,15 +1,9 @@
-import { NavigationContainerRef } from "@react-navigation/native";
-import React from "react";
+import { createNavigationContainerRef, NavigationContainerRef } from '@react-navigation/native';
 
-export type RootStackParamList = {
-    Home: object;
-    FindUser: object;
-    Notification: object
-  };
+export const navigationRef = createNavigationContainerRef<Record<string, object | undefined>>()
 
-export const navigationRef = React.createRef<NavigationContainerRef<RootStackParamList>>();
-
-export function navigate(name: string, params: object) {
-    navigationRef.current?.navigate(name, params);
+export function navigate(name: string, params: object | undefined) {
+  if (navigationRef.isReady()) {
+    navigationRef.navigate(name, params);
   }
-  
+}

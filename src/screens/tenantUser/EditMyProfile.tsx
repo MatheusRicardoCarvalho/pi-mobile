@@ -3,6 +3,7 @@ import { Body, ButtonTouch, ContainerForm, ContainerEdit, Input, Label, StyledTe
 import { AuthContext } from "../../context/AuthContext";
 import { Alert, ScrollView } from "react-native";
 import { api } from "../../services/api";
+import * as ImagePicker from 'expo-image-picker';
 
 export default function EditMyProfile() {
     const [name, setName] = useState('');
@@ -28,7 +29,54 @@ export default function EditMyProfile() {
         setAboutMe(aboutMe)
     }, [])
 
-    
+
+    // INUTILIZADO POR HORA
+    const handlePickerImage = async () => {
+        const { granted } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (!granted) {
+            Alert.alert(
+                'Permissão necessária',
+                'Permita que sua aplicação acesse as imagens'
+            );
+        } else {
+            const { assets, canceled } = await ImagePicker.launchImageLibraryAsync({
+                allowsEditing: true,
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                base64: false,
+                aspect: [4, 4],
+                quality: 1,
+            });
+
+            if (canceled) {
+                //ToastAndroid.show('Operação cancelada', ToastAndroid.SHORT);
+            } else {
+                const userId = authContext?.user?.id;
+                const filename = assets[0].uri.substring(assets[0].uri.lastIndexOf('/') + 1, assets[0].uri.length);
+                const extend = filename.split('.')[1];
+                const formData = new FormData();
+                formData.append('file', JSON.parse(JSON.stringify({
+                    name: filename,
+                    uri: assets[0].uri,
+                    type: 'image/' + extend,
+                })))
+
+                try {
+                    const response = api.post('/photo_profile/' + userId, formData, {
+                        headers: {
+                            Accept: 'application/json',
+                            "Content-Type": 'multipart/form-data'
+                        }
+                    })
+                    const updatedUser = await api.get(`/photo_profile/${userId}`);
+                    console.log("FOTO: " + updatedUser.data)
+                    setFoto(updatedUser.data.photo);
+                } catch (error) {
+
+                }
+            }
+        }
+    };
+
 
     async function handleSubmit() {
         const id = authContext?.user?.id
@@ -54,7 +102,7 @@ export default function EditMyProfile() {
         let date = new Date(isoDate);
         return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
     }
-    
+
     function convertToISO(brDate: string): string {
         let parts = brDate.split('/');
         let date = new Date(Number(parts[2]), Number(parts[1]) - 1, Number(parts[0]));
@@ -95,12 +143,14 @@ export default function EditMyProfile() {
                                 onChangeText={setCidade}
                                 placeholder="Cidade"
                             />
-                            <Label>URL da Foto</Label>
+                            <Label>Foto</Label>
+
                             <InputScroll
                                 value={foto}
                                 onChangeText={setFoto}
                                 placeholder="URL da Foto"
                             />
+
                             {foto ? <StyledImage source={{ uri: foto }} /> : null}
                             <Label>Telefone:</Label>
                             <InputScroll

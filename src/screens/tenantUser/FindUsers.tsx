@@ -45,7 +45,7 @@ export default function FindUsers() {
                     <StyledFlatList
                         data={arrayUsers?.users}
                         keyExtractor={(item, index) => index.toString()}
-                        renderItem={({ item }) => <UserCardComponent user={item} />}
+                        renderItem={({ item }) => <UserCardComponent user={item} match={false}/>}
                     />
                 </ScrollViewContainer>
             </ContainerFindUser>

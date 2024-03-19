@@ -43,6 +43,7 @@ export default function Register() {
                         value={email}
                         onChangeText={setEmail}
                         keyboardType="email-address"
+                        inputMode="email"
                     />
 
                     <Label>Telefone:</Label>
@@ -51,6 +52,7 @@ export default function Register() {
                         value={telefone}
                         onChangeText={setTelefone}
                         keyboardType="phone-pad"
+                        inputMode="tel"
                     />
 
                     <Label>Data de Nascimento:</Label>

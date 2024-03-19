@@ -1,5 +1,6 @@
 import { FlatList } from "react-native";
 import styled from "styled-components/native";
+import { colorPallete } from "./colorPallete";
 
 export const Body = styled.View`
 display: flex;
@@ -8,10 +9,10 @@ flex-direction: column;
 justify-content: flex-end;
 align-items: center;
 row-gap: 24px;
-background-color:  #ccc;
+background-color:  ${colorPallete.background};
 `
 export const Title = styled.Text`
-color: rgb(63 63 70);
+color: ${colorPallete.text};
 font-size: 32px;
 font-weight: bold;
 text-align: center;
@@ -26,7 +27,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 border-radius: 40px 40px 0px 0px;
-background-color: #1A0D30;
+background-color: ${colorPallete.background2};
 row-gap: 8px;
 `
 
@@ -37,7 +38,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 border-radius: 40px 40px 0px 0px;
-background-color: #1A0D30;
+background-color: ${colorPallete.background2};
 `
 export const StyledImage = styled.Image`
 width: 100px;
@@ -68,10 +69,10 @@ export const ButtonTouch = styled.TouchableOpacity`
 width: 50%;
   padding: 8px 22px;
   border-radius: 8px;
-  background-color: #442180;
+  background-color: ${colorPallete.btnLight};
 `
 export const StyledText = styled.Text`
-color: #fff;
+color: ${colorPallete.textWhite};
 font-size: 18px;
 font-weight: bold;
 text-align: center;
@@ -90,7 +91,7 @@ export const Label = styled.Text`
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 8px;
-  color: #fff;
+  color: ${colorPallete.textWhite};
 `;
 
 export const Input = styled.TextInput`
@@ -98,7 +99,7 @@ export const Input = styled.TextInput`
   height: 8%;
   min-height: 32px;
   max-height: 44px;
-  color: #fff;
+  color: ${colorPallete.textWhite};
   border-color: gray;
   border-radius: 8px;
   border-width: 1px;

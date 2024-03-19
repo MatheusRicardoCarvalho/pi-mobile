@@ -15,7 +15,8 @@ export interface User {
     city: string;
     photo: string;
     aboutMe: string;
-    phone: string
+    phone: string;
+    
   }
   
   export interface AuthContextType {

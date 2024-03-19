@@ -42,7 +42,7 @@ export default function Home() {
                     <StyledScrollView>
                         {
                             matchedUsers?.map((user, index) => {
-                                return <UserCardComponent key={index} user={user} />
+                                return <UserCardComponent key={index} user={user} match={true}/>
                             })
                         }
                     </StyledScrollView>

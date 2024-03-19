@@ -5,12 +5,24 @@ import { navigate } from '../../routes/RootNavigation';
 
 export interface UserCardComponentProps {
   user: User;
+  match: boolean
 }
 
-export const UserCardComponent = ({ user }: UserCardComponentProps) => {
+export const UserCardComponent = ({ user, match }: UserCardComponentProps) => {
 
   function handleUserButton(){
     navigate('UserProfile', {
+      userId: user.id,
+      photo: user.photo, 
+      name: user.name, 
+      gender: user.gender, 
+      city: user.city, 
+      aboutMe: user.aboutMe
+    })
+  }
+
+  function handleChatButton(){
+    navigate('Chat', {
       userId: user.id,
       photo: user.photo, 
       name: user.name, 
@@ -39,6 +51,13 @@ export const UserCardComponent = ({ user }: UserCardComponentProps) => {
       <UserButton onPress={handleUserButton}>
         <ButtonText>Ver mais</ButtonText>
       </UserButton>
+      {
+        match ? (
+          <UserButton onPress={handleChatButton}>
+        <ButtonText>Ir Para o Chat</ButtonText>
+      </UserButton>
+        ) : null
+      }
     </UserCard>
   )
 };

@@ -1,11 +1,13 @@
 import styled from 'styled-components/native';
 import { ContainerEdit } from './home';
+import { colorPallete } from './colorPallete';
 
 export const Container = styled(ContainerEdit)`
   flex: 1;
   justify-content: flex-start;
   padding: 10px;
-  background-color: #1A0D30;
+  row-gap: 6;
+  background-color: ${colorPallete.background2};
 `;
 
 export const ProfileImage = styled.Image`
@@ -16,22 +18,22 @@ export const ProfileImage = styled.Image`
 
 export const Name = styled.Text`
   font-size: 40px;
-  color: #ffd;
+  color: ${colorPallete.textLight};
 `;
 
 export const Gender = styled.Text`
   font-size: 16px;
-  color: #ffd;
+  color: ${colorPallete.textLight};
 `;
 
 export const City = styled.Text`
   font-size: 16px;
-  color: #ffd;
+  color: ${colorPallete.textLight};
 `;
 
 export const AboutMe = styled.Text`
   font-size: 14px;
-  color: #ffd;
+  color: ${colorPallete.textLight};
 `;
 
 export const LikeContainer = styled.View`
@@ -45,7 +47,7 @@ export const LikeContainer = styled.View`
 `
 export const TextLikeCount = styled.Text`
   font-size: 14px;
-  color: #ffd;
+  color: ${colorPallete.textLight};
 `
 
 export const LikeButton = styled.TouchableOpacity`

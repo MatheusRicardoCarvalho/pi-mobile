@@ -1,9 +1,10 @@
 import styled from "styled-components/native";
+import { colorPallete } from "../../styleds/colorPallete";
 
 export const UserCard = styled.View`
   width: 90%;
   align-self: center;
-  background-color: #fff;
+  background-color: ${colorPallete.background};
   border-radius: 10px;
   padding: 20px;
   margin: 10px;
@@ -19,35 +20,35 @@ export const ProfileImage = styled.View`
   width: 70px;
   height: 70px;
   border-radius: 50px;
-  background-color: #D5BDFF;
+  background-color: ${colorPallete.subtleAccent2};
   justify-content: center;
   align-items: center;
 `;
 
 export const InitialLetter = styled.Text`
   font-size: 40px; 
-  color: #32234D; 
+  color: ${colorPallete.btn}; 
 `;
 
 export const UserName = styled.Text`
   font-size: 20px;
   font-weight: bold;
-  color: #333;
+  color: ${colorPallete.textLight};
 `;
 
 export const UserGender = styled.Text`
   font-size: 16px;
-  color: #666;
+  color: ${colorPallete.greyLight};
 `;
 
 export const UserCity = styled.Text`
   font-size: 16px;
-  color: #666;
+  color: ${colorPallete.greyLight};
 `;
 
 export const UserButton = styled.TouchableOpacity`
   width: 90%;
-  background-color: #32234D;
+  background-color: ${colorPallete.btn};
   border-radius: 10px;
   padding: 20px;
   margin: 10px;
@@ -56,5 +57,5 @@ export const UserButton = styled.TouchableOpacity`
 
 export const ButtonText = styled.Text`
   font-size: 20px;
-  color: #fff;
+  color: ${colorPallete.textWhite};
 `;

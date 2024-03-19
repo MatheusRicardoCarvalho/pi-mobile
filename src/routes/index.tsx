@@ -7,6 +7,8 @@ import { PrivateRoutes } from "./PrivateRoutes";
 import { AnotherUserProfile } from "../screens/tenantUser/AnoterUserProfile";
 import { navigationRef } from "./RootNavigation";
 import EditMyProfile from "../screens/tenantUser/EditMyProfile";
+import { ChooseTags } from "../screens/tenantUser/ChooseTags";
+import { ChatScreen } from "../screens/ChatScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +21,8 @@ export const AppRouter = () => {
         <Stack.Screen name="Home" component={PrivateRoutes} />
         <Stack.Screen name="UserProfile" component={AnotherUserProfile} />
         <Stack.Screen name="EditMyProfile" component={EditMyProfile} />
+        <Stack.Screen name="EditTag" component={ChooseTags} />
+        <Stack.Screen name="Chat" component={ChatScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

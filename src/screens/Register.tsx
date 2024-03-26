@@ -3,6 +3,8 @@ import { Body, ButtonTouch, ContainerLogin, Title, StyledText, ContainerForm, La
 import { api } from "../services/api";
 import { useLinkTo } from "@react-navigation/native";
 import { AuthContext } from "../context/AuthContext";
+import { validDatNasc, validTel } from "../utils/validations";
+import { DateInput } from "../components/DateInput";
 
 export default function Register() {
     const [name, setName] = useState('');
@@ -13,9 +15,14 @@ export default function Register() {
     const linkTo = useLinkTo();
     const authContext = useContext(AuthContext)
 
+
     const handleSubmit = async () => {
-        const data = { name, email, password, userType: "tenantUser" }
+        const canRegister = (validTel(telefone) && validDatNasc(nascimento))
         try{
+            if (!canRegister) throw new Error("Campos inválidos !");
+            
+            const data = { name, email, password, userType: "tenantUser", telefone, nascimento }
+
             const response = await api.post('/users/create', data)
             console.log(response.data)
             await authContext?.signIn(email, password)
@@ -56,11 +63,7 @@ export default function Register() {
                     />
 
                     <Label>Data de Nascimento:</Label>
-                    <Input
-                        placeholder="Digite sua data de nascimento"
-                        value={nascimento}
-                        onChangeText={setNascimento}
-                    />
+                    <DateInput value={nascimento} onChange={setNascimento} typeInput="datetime"/>
 
                     <Label>password:</Label>
                     <Input

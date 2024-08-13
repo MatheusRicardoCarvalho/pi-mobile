@@ -9,6 +9,7 @@ import { navigationRef } from "./RootNavigation";
 import EditMyProfile from "../screens/tenantUser/EditMyProfile";
 import { ChooseTags } from "../screens/tenantUser/ChooseTags";
 import { ChatScreen } from "../screens/ChatScreen";
+import { FilterModal } from "../screens/tenantUser/Modal/FilterModal";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,7 +24,9 @@ export const AppRouter = () => {
         <Stack.Screen name="EditMyProfile" component={EditMyProfile} />
         <Stack.Screen name="EditTag" component={ChooseTags} />
         <Stack.Screen name="Chat" component={ChatScreen} />
+      
       </Stack.Navigator>
+      
     </NavigationContainer>
   );
 };

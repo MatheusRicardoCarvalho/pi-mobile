@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { ScrollViewContainer, Title } from "../../styleds/home";
-import { Tag } from "./MyUserProfile";
+import { Tag } from "../../services/apiClient";
 import { api } from "../../services/api";
 import { TagsContainer, TagText } from "../../styleds/MyUserProfile";
 import { AuthContext } from "../../context/AuthContext";

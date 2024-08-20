@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useRoute } from "@react-navigation/native";
 import { AuthContext } from "../../context/AuthContext";
 import {
   Body,
@@ -28,18 +28,36 @@ export interface ArrayUsers {
 export default function FindUsers() {
   const authContext = useContext(AuthContext);
   const [arrayUsers, setArrayUsers] = useState<ArrayUsers | null>(null);
+  const route = useRoute();
+  const params = route.params || {} ;
 
   useFocusEffect(
     React.useCallback(() => {
-      initArrayUsers();
+      initArrayUsers(params);
     }, [])
   );
 
-  async function initArrayUsers() {
+
+  async function initArrayUsers(params: any) {
+    const data = {
+      name: params?.name || "",
+      email: params?.email || "",
+      city: params?.city || "",
+      gender: params?.gender || "",
+      rangerAge: params?.rangeAge || {idadeMax: 100 , idadeMin: 0},
+      Ilike: params?.Ilike || false,
+      userId: authContext?.user?.id || 0
+    }
     try {
-      const response = await api.get("/users");
+      if(params){
+        const response = await api.post("/users/find", data);
       const array = response.data.users;
       setArrayUsers({ users: array });
+      } else {
+        const response = await api.get("/users");
+        const array = response.data.users;
+        setArrayUsers({ users: array });
+      }
     } catch (err) {
       console.log("erro ao buscar usuários: " + err);
     }

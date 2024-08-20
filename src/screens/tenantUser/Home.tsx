@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Body, ButtonTouch, ContainerForm, ContainerEdit, Input, Label, StyledText, Title, StyledScrollView, StyledImage, ScrollViewContainer, InputScroll } from "../../styleds/home";
 import { AuthContext } from "../../context/AuthContext";
-import { Alert, ScrollView } from "react-native";
+import { Alert, SafeAreaView, ScrollView, StyleSheet } from "react-native";
 import { api } from "../../services/api";
 import { ContainerMatch } from "../../styleds/Matchs";
 import { useFocusEffect } from "@react-navigation/native";
@@ -31,7 +31,8 @@ export default function Home() {
     }
 
     return (
-        <>
+        <SafeAreaView style={styles.container}>
+
             <Title>Meus Matchs</Title>
             
             
@@ -48,6 +49,11 @@ export default function Home() {
                     </StyledScrollView>
                 </ScrollViewContainer>
             </ContainerMatch>
-        </>
+        </SafeAreaView>
     )
 }
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+  });

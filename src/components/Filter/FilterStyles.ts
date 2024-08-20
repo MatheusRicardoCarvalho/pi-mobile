@@ -25,6 +25,7 @@ export const Label = styled.Text`
 
 export const RadioGroup = styled.View`
     display: flex;
+    flex-direction: row;
     gap: 10px;
 `;
 
@@ -39,7 +40,7 @@ export const RangeSlider = styled.TextInput`
 
 export const CheckboxGroup = styled.View`
     display: flex;
-    align-items: center;
+    align-items: flex-start;
 `;
 
 export const ButtonContainer = styled.View`

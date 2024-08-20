@@ -4,15 +4,20 @@ import Register from './src/screens/Register';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AppRouter } from './src/routes';
 import { AuthProvider } from './src/context/AuthContext';
+import { SafeAreaView } from 'react-native';
+import { PaperProvider } from 'react-native-paper';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
-    <AuthProvider>
-    <AppRouter />
+      <PaperProvider>
+        <AuthProvider>
+        <AppRouter />
 
-    </AuthProvider>
+      </AuthProvider>
+      </PaperProvider>
+
   );
 }
 

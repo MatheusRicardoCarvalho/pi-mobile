@@ -15,7 +15,7 @@ import { User } from "../../context/AuthContext";
 import { api } from "../../services/api";
 import { ContainerFindUser } from "../../styleds/find_users";
 import React from "react";
-import { FlatList, Modal, Text } from "react-native";
+import { FlatList, Text } from "react-native";
 import { ButtonText, UserButton } from "../../components/FindUsers/UserCardStyles";
 import { navigate } from "../../routes/RootNavigation";
 import { FilterUsers } from "../../components/Filter/FilterUsers";
@@ -28,7 +28,6 @@ export interface ArrayUsers {
 export default function FindUsers() {
   const authContext = useContext(AuthContext);
   const [arrayUsers, setArrayUsers] = useState<ArrayUsers | null>(null);
-  const [modalVisible, setModalVisible] = useState(false);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -51,8 +50,7 @@ export default function FindUsers() {
   };
 
   function handleFilter() {
-    //navigate("FilterModal", {})
-    setModalVisible(!modalVisible);
+    navigate("FilterModal", {})
   }
 
   return (
@@ -71,17 +69,6 @@ export default function FindUsers() {
             )}
           />
         </ScrollViewContainer>
-        <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}>
-        <FilterUsers />
-        
-
-        </Modal>
       </ContainerFindUser>
     </>
   );

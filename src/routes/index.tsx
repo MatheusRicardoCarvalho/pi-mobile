@@ -16,7 +16,7 @@ const Stack = createNativeStackNavigator();
 export const AppRouter = () => {
   return (
     <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator initialRouteName="Login" screenOptions={ {headerShown: false}} > 
+      <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }} >
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Home" component={PrivateRoutes} />
@@ -24,9 +24,11 @@ export const AppRouter = () => {
         <Stack.Screen name="EditMyProfile" component={EditMyProfile} />
         <Stack.Screen name="EditTag" component={ChooseTags} />
         <Stack.Screen name="Chat" component={ChatScreen} />
-      
+        <Stack.Group screenOptions={{ presentation: 'modal' }}>
+          <Stack.Screen name="FilterModal" component={FilterModal} />
+        </Stack.Group>
       </Stack.Navigator>
-      
+
     </NavigationContainer>
   );
 };

@@ -7,15 +7,6 @@ export function FilterModal(){
     const [modalVisible, setModalVisible] = useState(false);
 
     return(
-        <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}>
         <FilterUsers />
-
-        </Modal>
     )
 }

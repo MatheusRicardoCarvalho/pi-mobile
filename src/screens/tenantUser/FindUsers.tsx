@@ -20,16 +20,18 @@ import { ButtonText, UserButton } from "../../components/FindUsers/UserCardStyle
 import { navigate } from "../../routes/RootNavigation";
 import { FilterUsers } from "../../components/Filter/FilterUsers";
 import { DateInput } from "../../components/DateInput";
+import { FilterUserContext } from "../../context/FilterUserContext";
 
 export interface ArrayUsers {
   users: User[];
 }
 
 export default function FindUsers() {
+  const { filters, setFilters } = useContext(FilterUserContext)!;
   const authContext = useContext(AuthContext);
   const [arrayUsers, setArrayUsers] = useState<ArrayUsers | null>(null);
   const route = useRoute();
-  const params = route.params || {} ;
+  const params = route.params || {};
 
   useFocusEffect(
     React.useCallback(() => {
@@ -44,15 +46,22 @@ export default function FindUsers() {
       email: params?.email || "",
       city: params?.city || "",
       gender: params?.gender || "",
-      rangerAge: params?.rangeAge || {idadeMax: 100 , idadeMin: 0},
+      rangerAge: params?.rangeAge || { idadeMax: 100, idadeMin: 0 },
       Ilike: params?.Ilike || false,
       userId: authContext?.user?.id || 0
     }
+    console.log("Aqui está os filtros: " + JSON.stringify(filters))
     try {
-      if(params){
-        const response = await api.post("/users/find", data);
-      const array = response.data.users;
-      setArrayUsers({ users: array });
+      console.log("PARAMETROS: "+ JSON.stringify(filters))
+      if (filters.applyFilter) {
+        const response = await api.post("/users/find", filters);
+        const array: any = response.data;
+        array.users.forEach((user: { tags: any[] }) => {
+          user.tags = user.tags.map(tagObj => tagObj.tag.name);
+        });
+        array.users.map((user: { name: string; }) => console.log("Usuário: " + user.name + " \n"))
+
+        setArrayUsers({ users: array.users });
       } else {
         const response = await api.get("/users");
         const array = response.data.users;
@@ -76,7 +85,7 @@ export default function FindUsers() {
       <Title>Outros Usuários</Title>
       <ContainerFindUser>
         <UserButton onPress={handleFilter}>
-            <ButtonText>Definir Filtros</ButtonText>
+          <ButtonText>Definir Filtros</ButtonText>
         </UserButton>
         <ScrollViewContainer>
           <StyledFlatList

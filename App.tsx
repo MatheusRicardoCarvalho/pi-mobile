@@ -6,6 +6,7 @@ import { AppRouter } from './src/routes';
 import { AuthProvider } from './src/context/AuthContext';
 import { SafeAreaView } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
+import { FilterUserProvider } from './src/context/FilterUserContext';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -13,7 +14,10 @@ export default function App() {
   return (
       <PaperProvider>
         <AuthProvider>
-        <AppRouter />
+          <FilterUserProvider>
+          <AppRouter />
+
+          </FilterUserProvider>
 
       </AuthProvider>
       </PaperProvider>

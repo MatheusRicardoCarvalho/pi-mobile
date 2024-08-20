@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Container, Title, FilterOption, Label, RadioGroup, RadioLabel, RangeSlider, CheckboxGroup, ButtonContainer , Button} from "./FilterStyles";
 import { ButtonText, UserButton } from "../FindUsers/UserCardStyles";
 import RadioButtonGroup from "react-native-paper/lib/typescript/components/RadioButton/RadioButtonGroup";
@@ -6,20 +6,31 @@ import { View, Text } from "react-native";
 import { Checkbox, RadioButton } from "react-native-paper";
 import { Input } from "../../styleds/home";
 import { navigate } from "../../routes/RootNavigation";
-
+import { useNavigation } from "@react-navigation/native";
+import { FilterUserContext } from "../../context/FilterUserContext";
+import { AuthContext } from "../../context/AuthContext";
 
 export function FilterUsers() {
     const [genero, setGenero] = useState<string>('')
     const [idade, setIdade] = useState<number | null>()
-
+    const navigation = useNavigation()
+    const { filters, setFilters } = useContext(FilterUserContext)!;
+    const authContext = useContext(AuthContext);
     const [checkLikedUsers, setCheckLikedUsers] = useState<boolean>(false)
+
     const filterOptions = {
+        name: "",
+        email: "",
+        city: "",
         gender: genero,
-        rangeAge: {idadeMin: idade, idadeMax: idade},
-        Ilike: checkLikedUsers
+        rangerAge: {idadeMin: idade, idadeMax: idade},
+        Ilike: checkLikedUsers,
+        userId: authContext?.user?.id || 0,
+        applyFilter: true
     }
     function handlerApply() {
-        navigate("FindUsers", {filterOptions})
+        setFilters(filterOptions)
+        navigation.goBack()
     }
 
     return (

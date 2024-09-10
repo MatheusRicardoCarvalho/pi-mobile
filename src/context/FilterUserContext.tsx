@@ -6,7 +6,7 @@ export interface FilterUser {
     email: string;
     city: string;
     gender: string;
-    rangerAge: {
+    rangeAge: {
         idadeMax: number | null | undefined;
         idadeMin: number | null | undefined;
     };
@@ -30,7 +30,7 @@ export const FilterUserProvider = ({ children }: { children: ReactNode }) => {
         email: "",
         city: "",
         gender: "",
-        rangerAge: { idadeMax: 100, idadeMin: 0 },
+        rangeAge: { idadeMax: 100, idadeMin: 0 },
         Ilike: false,
         userId: user?.id || 0 ,
         applyFilter: false

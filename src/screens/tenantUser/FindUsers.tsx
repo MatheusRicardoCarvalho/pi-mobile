@@ -42,8 +42,8 @@ export default function FindUsers() {
 
   async function initArrayUsers(params: any) {
     const data = {
-      name: params?.name || "",
-      email: params?.email || "",
+      name: params?.name || "sem nome",
+      email: params?.email || "sem email",
       city: params?.city || "",
       gender: params?.gender || "",
       rangerAge: params?.rangeAge || { idadeMax: 100, idadeMin: 0 },

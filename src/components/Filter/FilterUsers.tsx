@@ -12,7 +12,9 @@ import { AuthContext } from "../../context/AuthContext";
 
 export function FilterUsers() {
     const [genero, setGenero] = useState<string>('')
-    const [idade, setIdade] = useState<number | null>()
+    const [idadeMin, setIdadeMin] = useState<number | null>(null);
+const [idadeMax, setIdadeMax] = useState<number | null>(null);
+
     const navigation = useNavigation()
     const { filters, setFilters } = useContext(FilterUserContext)!;
     const authContext = useContext(AuthContext);
@@ -23,13 +25,15 @@ export function FilterUsers() {
         email: "",
         city: "",
         gender: genero,
-        rangerAge: {idadeMin: idade, idadeMax: idade},
+        rangeAge: { idadeMin: idadeMin || 0, idadeMax: idadeMax || 100 }, 
         Ilike: checkLikedUsers,
         userId: authContext?.user?.id || 0,
         applyFilter: true
-    }
+    };
+    
     function handlerApply() {
         setFilters(filterOptions)
+        console.log("AQUI está os filtros atualizados: \n\n"+JSON.stringify(filterOptions))
         navigation.goBack()
     }
 
@@ -57,9 +61,21 @@ export function FilterUsers() {
             </FilterOption>
 
             <FilterOption>
-                <Label>Idade</Label>
-                <Input keyboardType="numeric" onChangeText={(value) => setIdade(parseInt(value))}/>
-            </FilterOption>
+    <Label>Idade Mínima</Label>
+    <Input
+        keyboardType="numeric"
+        onChangeText={(value) => setIdadeMin(parseInt(value))}
+    />
+</FilterOption>
+
+<FilterOption>
+    <Label>Idade Máxima</Label>
+    <Input
+        keyboardType="numeric"
+        onChangeText={(value) => setIdadeMax(parseInt(value))}
+    />
+</FilterOption>
+
 
             <FilterOption>
                 <CheckboxGroup>

@@ -14,4 +14,14 @@ export async function getUserTags(userId: string):Promise<Tag[]> {
     } catch (error) {
       throw new Error("Error fetching tags:"+ error);
     }
-  }
+}
+
+export async function getTags(){
+  try {  
+  const response: Tag[] = (await api.get("/tags")).data.tags;
+      return response
+    } catch (error) {
+      console.error("Error fetching tags:", error);
+    }
+  
+}

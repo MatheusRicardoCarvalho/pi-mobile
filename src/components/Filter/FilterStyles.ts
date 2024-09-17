@@ -1,12 +1,16 @@
 import styled from 'styled-components/native';
 import { colorPallete } from '../../styleds/colorPallete';
 
-export const Container = styled.View`
+export const Container = styled.SafeAreaView`
     background-color: ${colorPallete.background};
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 `;
+
+export const ScrollContainer = styled.ScrollView`
+
+`
 
 export const Title = styled.Text`
     color: ${colorPallete.text};

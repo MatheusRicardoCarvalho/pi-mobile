@@ -36,7 +36,7 @@ export default function FindUsers() {
   useFocusEffect(
     React.useCallback(() => {
       initArrayUsers();
-    }, [filters]) // Adicione filters como dependência
+    }, [filters])
   );
 
   async function initArrayUsers() {

@@ -35,27 +35,16 @@ export default function FindUsers() {
 
   useFocusEffect(
     React.useCallback(() => {
-      initArrayUsers(params);
-    }, [])
+      initArrayUsers();
+    }, [filters]) // Adicione filters como dependência
   );
 
-
-  async function initArrayUsers(params: any) {
-    const data = {
-      name: params?.name || "sem nome",
-      email: params?.email || "sem email",
-      city: params?.city || "",
-      gender: params?.gender || "",
-      rangerAge: params?.rangeAge || { idadeMax: 100, idadeMin: 0 },
-      Ilike: params?.Ilike || false,
-      userId: authContext?.user?.id || 0
-    }
-    console.log("Aqui está os filtros: " + JSON.stringify(filters))
+  async function initArrayUsers() {
     try {
       console.log("PARAMETROS: "+ JSON.stringify(filters))
       if (filters.applyFilter) {
         const response = await api.post("/users/find", filters);
-        const array: any = response.data;
+        const array = response.data;
         array.users.forEach((user: { tags: any[] }) => {
           user.tags = user.tags.map(tagObj => tagObj.tag.name);
         });
@@ -64,8 +53,7 @@ export default function FindUsers() {
         setArrayUsers({ users: array.users });
       } else {
         const response = await api.get("/users");
-        const array = response.data.users;
-        setArrayUsers({ users: array });
+        setArrayUsers({ users: response.data.users });
       }
     } catch (err) {
       console.log("erro ao buscar usuários: " + err);

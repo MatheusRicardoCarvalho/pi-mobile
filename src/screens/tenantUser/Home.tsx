@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Body, ButtonTouch, ContainerForm, ContainerEdit, Input, Label, StyledText, Title, StyledScrollView, StyledImage, ScrollViewContainer, InputScroll } from "../../styleds/home";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext, User } from "../../context/AuthContext";
 import { Alert, SafeAreaView, ScrollView, StyleSheet } from "react-native";
 import { api } from "../../services/api";
 import { ContainerMatch } from "../../styleds/Matchs";
@@ -13,28 +13,30 @@ export default function Home() {
 
     function handlesignOut() {
         authContext?.signOut();
-
     }
+
     useFocusEffect(
         React.useCallback(() => {
             setupMatchs()
         }, [])
     )
+
     async function setupMatchs(){
         const data = {userId: authContext?.user?.id}
         try{
             const response = await api.post('/findMatchs', data)
-            setMatchedUsers(response.data.matchedUsers)
+            const filteredMatchedUsers = response.data.matchedUsers.filter(
+                (user: User) => user.id !== authContext?.user?.id
+            );
+            setMatchedUsers(filteredMatchedUsers)
         } catch (err) {
-            console.log()
+            console.log("Erro ao buscar matches:", err)
         }
     }
 
     return (
         <SafeAreaView style={styles.container}>
-
             <Title>Meus Matchs</Title>
-            
             
             <ContainerMatch>
                 <ButtonTouch onPress={handlesignOut} ><StyledText>Sair</StyledText></ButtonTouch>
@@ -52,8 +54,9 @@ export default function Home() {
         </SafeAreaView>
     )
 }
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,
     },
-  });
+});

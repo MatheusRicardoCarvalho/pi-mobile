@@ -1,13 +1,15 @@
 import { useContext, useEffect, useState } from "react";
-import { ScrollViewContainer, Title } from "../../styleds/home";
+import { ButtonTouch, ScrollViewContainer, StyledText, Title } from "../../styleds/home";
 import { Tag } from "../../services/apiClient";
 import { api } from "../../services/api";
 import { TagsContainer, TagText } from "../../styleds/MyUserProfile";
 import { AuthContext } from "../../context/AuthContext";
 import { ContainerChooseTags, ScrollViewChooseTags, TagBtn } from "../../styleds/ChooseTags";
 import { Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 export function ChooseTags() {
+  const navigation = useNavigation();
   const [tags, setTags] = useState<Tag[]>([]);
   const [myTags, setMyTags] = useState<Tag[]>([]);
 
@@ -124,6 +126,8 @@ export function ChooseTags() {
           </TagsContainer>
         ) : null}
             </ScrollViewChooseTags>
+            <ButtonTouch style={{marginBottom: 20}} onPress={() => navigation.goBack()}><StyledText style={{fontSize: 16}}>Voltar</StyledText></ButtonTouch>
+
         </ContainerChooseTags>
     </>
   );

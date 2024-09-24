@@ -4,6 +4,8 @@ import styled from "styled-components/native";
 export const TagsContainer = styled.View`
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     margin-top: 16px;
 `;
 

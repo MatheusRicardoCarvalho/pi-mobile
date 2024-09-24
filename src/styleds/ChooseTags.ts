@@ -20,6 +20,8 @@ flex: 1;
 width: 100%;
 flex-direction: column;
 justify-content: center;
+padding-left: 16px;
+padding-right: 16px;
 align-items: center;
 border-radius: 40px 40px 0px 0px;
 background-color: ${colorPallete.background2};

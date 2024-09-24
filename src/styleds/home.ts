@@ -91,7 +91,7 @@ export const Label = styled.Text`
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 8px;
-  color: ${colorPallete.textWhite};
+  color: ${colorPallete.textLight};
 `;
 
 export const Input = styled.TextInput`
@@ -109,5 +109,6 @@ export const Input = styled.TextInput`
 
 export const InputScroll = styled(Input)`
 height: 60px;
+color: ${colorPallete.text};
 `
 

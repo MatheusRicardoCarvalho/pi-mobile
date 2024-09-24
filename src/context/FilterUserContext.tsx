@@ -1,5 +1,6 @@
 import React, { ReactNode, createContext, useState, useContext } from "react";
 import { AuthContext } from "./AuthContext"; 
+import { Tag } from "../services/apiClient";
 
 export interface FilterUser {
     name: string;
@@ -12,6 +13,7 @@ export interface FilterUser {
     };
     Ilike: boolean;
     userId: string | number;
+    tags: Tag[];
     applyFilter: boolean;
 }
 
@@ -33,7 +35,8 @@ export const FilterUserProvider = ({ children }: { children: ReactNode }) => {
         rangeAge: { idadeMax: 100, idadeMin: 0 },
         Ilike: false,
         userId: user?.id || 0 ,
-        applyFilter: false
+        tags: [],
+        applyFilter: false,
     });
 
     return (

@@ -9,7 +9,8 @@ export const Container = styled.SafeAreaView`
 `;
 
 export const ScrollContainer = styled.ScrollView`
-
+    height: 85%;
+    align-self: center;
 `
 
 export const Title = styled.Text`

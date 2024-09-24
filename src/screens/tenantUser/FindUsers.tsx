@@ -43,7 +43,10 @@ export default function FindUsers() {
     try {
       console.log("PARAMETROS: "+ JSON.stringify(filters))
       if (filters.applyFilter) {
-        const response = await api.post("/users/find", filters);
+        const data = { ...filters , tags: filters.tags.map(tag => tag.name) };
+        console.log("PARAMETROS ENVIADOS: "+ JSON.stringify(data))
+
+        const response = await api.post("/users/find", data);
         const array = response.data;
         array.users.forEach((user: { tags: any[] }) => {
           user.tags = user.tags.map(tagObj => tagObj.tag.name);

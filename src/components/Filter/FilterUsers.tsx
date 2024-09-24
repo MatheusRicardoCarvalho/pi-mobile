@@ -1,24 +1,26 @@
 // FilterUsers.tsx
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Container, Title, FilterOption, Label, RadioGroup, RadioLabel, RangeSlider, CheckboxGroup, ButtonContainer, Button, ScrollContainer } from "./FilterStyles";
 import { ButtonText, UserButton } from "../FindUsers/UserCardStyles";
 import RadioButtonGroup from "react-native-paper/lib/typescript/components/RadioButton/RadioButtonGroup";
 import { View, Text } from "react-native";
 import { Checkbox, RadioButton } from "react-native-paper";
-import { Input } from "../../styleds/home";
+import { ButtonTouch, Input } from "../../styleds/home";
 import { navigate } from "../../routes/RootNavigation";
 import { useNavigation } from "@react-navigation/native";
 import { FilterUserContext } from "../../context/FilterUserContext";
 import { AuthContext } from "../../context/AuthContext";
 import TagRemovable from "../Tags/TagRemovable";
 import { Tag } from "../../services/apiClient";
+import ShowAndChooseAllTags from "../ShowAndChooseAllTags/ShowAndChooseAllTags";
+import { RadioView } from "../../styleds/generalStyles";
 
 export function FilterUsers() {
     const [genero, setGenero] = useState<string>('');
     const [idadeMin, setIdadeMin] = useState<number | null>(null);
     const [idadeMax, setIdadeMax] = useState<number | null>(null);
-    const [selectedTags, setSelectedTags] = useState<Tag[]>([{id: 1, name: "futebol", type: "vida"}, {id: 2 , name: "nerd", type: "vida"}]);
-
+    const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+    const [tagsName, setTagsName] = useState<string[]>([]);
     const navigation = useNavigation();
     const { filters, setFilters } = useContext(FilterUserContext)!;
     const authContext = useContext(AuthContext);
@@ -32,6 +34,7 @@ export function FilterUsers() {
         rangeAge: { idadeMin: idadeMin || 0, idadeMax: idadeMax || 100 },
         Ilike: checkLikedUsers,
         userId: authContext?.user?.id || 0,
+        tags: selectedTags,
         applyFilter: true
     };
 
@@ -41,9 +44,20 @@ export function FilterUsers() {
         navigation.goBack();
     }
 
-    function handleRemoveTag(tagId: number) {
-        setSelectedTags(prevTags => prevTags.filter(tag => tag.id !== tagId));
+    function handleRemoveTag(tagId: number, tagName: string) {
+        setFilters({...filters, tags: filters.tags.filter(tag => tag.id !== tagId)});
+        //setSelectedTags(prevTags => prevTags.filter(tag => tag.id !== tagId));
+        setTagsName(prevTags => prevTags.filter(tag => tag !== tagName));
     }
+
+    function handleAddTags(tags: Tag[]) {
+        setSelectedTags(prevTags => [...prevTags, ...tags]);
+        setTagsName(prevTags => [...prevTags, ...tags.map(tag => tag.name)]);
+    }
+
+    useEffect(() => {
+        setSelectedTags(filters.tags);
+    }, [filters.tags]);
 
     return (
         <Container>
@@ -52,21 +66,26 @@ export function FilterUsers() {
                 <FilterOption>
                     <Label>Genero</Label>
                     <RadioGroup>
-                        <RadioButton.Group onValueChange={newValue => setGenero(newValue)} value={genero}>
-                            <View>
-                                <Text>Masculino</Text>
-                                <RadioButton value="masculino" />
-                            </View>
-                            <View>
-                                <Text>Feminino</Text>
-                                <RadioButton value="feminino" />
-                            </View>
-                            <View>
-                                <Text>Outro</Text>
-                                <RadioButton value="Outro" />
-                            </View>
-                        </RadioButton.Group>
-                    </RadioGroup>
+                <RadioButton.Group
+                  onValueChange={(newValue) => setGenero(newValue)}
+                  value={genero}
+                >
+                  <RadioView>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Label>Masculino</Label>
+                    <RadioButton value="masculino" />
+                  </View>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Label>Feminino</Label>
+                    <RadioButton value="feminino" />
+                  </View>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Label>Outro</Label>
+                    <RadioButton value="Outro" />
+                  </View>
+                  </RadioView>
+                </RadioButton.Group>
+              </RadioGroup>
                 </FilterOption>
 
                 <FilterOption>
@@ -97,6 +116,8 @@ export function FilterUsers() {
                 </FilterOption>
 
                 <FilterOption>
+                    <Label>Filtrar por Tags</Label>
+                    <ButtonTouch onPress={() => navigate("ShowAndChooseAllTags", {})}><Text>Escolher Tags</Text></ButtonTouch>
                     {selectedTags.length > 0 && selectedTags.map((tag) => (
                         <TagRemovable 
                             tag={tag} 

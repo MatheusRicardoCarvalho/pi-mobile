@@ -10,6 +10,7 @@ import EditMyProfile from "../screens/tenantUser/EditMyProfile";
 import { ChooseTags } from "../screens/tenantUser/ChooseTags";
 import { ChatScreen } from "../screens/ChatScreen";
 import { FilterModal } from "../screens/tenantUser/Modal/FilterModal";
+import ShowAndChooseAllTags from "../components/ShowAndChooseAllTags/ShowAndChooseAllTags";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,7 @@ export const AppRouter = () => {
         <Stack.Screen name="Chat" component={ChatScreen} />
         <Stack.Group screenOptions={{ presentation: 'modal' }}>
           <Stack.Screen name="FilterModal" component={FilterModal} />
+          <Stack.Screen name="ShowAndChooseAllTags" component={ShowAndChooseAllTags} />
         </Stack.Group>
       </Stack.Navigator>
 

@@ -8,6 +8,11 @@ export const TagBtn = styled.TouchableOpacity`
   border-radius: 4px;
   font-size: 12px;
   color: #333;
+  height: fit-content;
+  width: 160px;
+  max-width: 160px;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ContainerChooseTags = styled.View`

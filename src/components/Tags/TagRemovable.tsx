@@ -9,14 +9,14 @@ type TagType = {
 
 interface Prop {
       tag: TagType,
-      onRemove: (id: number) => void
+      onRemove: (id: number, tagName: string) => void
 }
 
 const TagRemovable = ({ tag, onRemove }: Prop) => {
       return (
         <TagContainer>
           <TagText>{tag.name}</TagText>
-          <RemoveButton onPress={() => onRemove(tag.id)}>
+          <RemoveButton onPress={() => onRemove(tag.id, tag.name)}>
             <RemoveButtonText>X</RemoveButtonText>
           </RemoveButton>
         </TagContainer>

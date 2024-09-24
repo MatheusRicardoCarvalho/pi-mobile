@@ -1,44 +1,65 @@
-import Login from './src/screens/Login';
-import { NavigationContainer } from "@react-navigation/native";
-import Register from './src/screens/Register';
-import { StyleSheet } from 'react-native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { AppRouter } from './src/routes';
-import { AuthProvider } from './src/context/AuthContext';
-import { SafeAreaView } from 'react-native';
+import 'react-native-get-random-values';
+import React, { useEffect, useState } from 'react';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
+import * as Font from 'expo-font';
+import { Ionicons } from '@expo/vector-icons';
+import * as SplashScreen from 'expo-splash-screen';
+
+import { AuthProvider } from './src/context/AuthContext';
 import { FilterUserProvider } from './src/context/FilterUserContext';
+import { AppRouter } from './src/routes';
+
+// Mantenha a tela de splash visível enquanto carregamos recursos
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  const Stack = createNativeStackNavigator();
+  const [appIsReady, setAppIsReady] = useState(false);
+
+  useEffect(() => {
+    async function prepare() {
+      try {
+        // Pré-carregue as fontes
+        await Font.loadAsync(Ionicons.font);
+        // Aguarde por outros recursos aqui se necessário
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        // Diga à aplicação para renderizar
+        setAppIsReady(true);
+      }
+    }
+
+    prepare();
+  }, []);
+
+  const onLayoutRootView = React.useCallback(async () => {
+    if (appIsReady) {
+      // Isso diz à tela de splash para se esconder imediatamente
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
+  }
 
   return (
-    <SafeAreaView style={styles.container}>
-<PaperProvider>
+    <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
+      <PaperProvider>
         <AuthProvider>
           <FilterUserProvider>
-          <AppRouter />
-
+            <AppRouter />
           </FilterUserProvider>
-
-      </AuthProvider>
+        </AuthProvider>
       </PaperProvider>
     </SafeAreaView>
-      
-
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 20
   },
 });
-/*const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#0000',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});*/

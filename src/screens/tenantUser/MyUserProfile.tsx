@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
+import { useFocusEffect } from '@react-navigation/native';
 import {
   Container,
   ProfileImage,
@@ -44,11 +45,7 @@ export function MyUserProfille() {
     navigate("EditTag", {});
   }
 
-  useEffect(() => {
-    getTags();
-  }, []);
-
-  async function getTags() {
+  const getTags = useCallback(async () => {
     try {
       const data = { userId: myProfile.userId }
       const responseMyTags: Tag[] = (await api.post("/user/tags", data)).data.tags;
@@ -57,7 +54,13 @@ export function MyUserProfille() {
     } catch (error) {
       console.error("Error fetching tags:", error);
     }
-  }
+  }, [myProfile.userId]);
+
+  useFocusEffect(
+    useCallback(() => {
+      getTags();
+    }, [getTags])
+  );
 
   return (
     <>
@@ -70,8 +73,8 @@ export function MyUserProfille() {
         <AboutMe>{aboutMe}</AboutMe>
         {myTags ? (
           <TagsContainer>
-            {myTags.map((tag) => (
-                <TagText>{tag.name}</TagText>
+            {myTags.map((tag, index) => (
+                <TagText key={index}>{tag.name}</TagText>
             ))}
           </TagsContainer>
         ) : null}

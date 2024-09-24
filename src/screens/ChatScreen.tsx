@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
+/*import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { GiftedChat, IMessage } from 'react-native-gifted-chat';
 import { useRoute } from '@react-navigation/native';
 import { api } from '../services/api';
@@ -70,4 +70,15 @@ export function ChatScreen() {
             inverted={false}
         />
     );
+}
+*/
+
+import { View, Text } from "react-native";
+
+export function ChatScreen() {
+    return (
+        <View>
+            <Text>ChatScreen</Text>
+        </View>
+    )
 }

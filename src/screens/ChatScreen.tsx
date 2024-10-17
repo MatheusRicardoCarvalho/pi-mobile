@@ -29,7 +29,7 @@ export function ChatScreen() {
                 user: {
                     _id: message.senderId,
                     name: message.senderId === senderId ? 'Você' : name,
-                    avatar: message.senderId === senderId ? 'sua-url-avatar' : photo, // Altere 'sua-url-avatar' para a URL do avatar do remetente
+                    avatar: message.senderId === senderId ? 'sua-url-avatar' : photo,
                 },
             }));
             setMessages(chatMessages);
@@ -65,7 +65,7 @@ export function ChatScreen() {
             messages={messages}
             onSend={messages => onSend(messages)}
             user={{
-                _id: senderId ?? 0, // Altere 0 para um valor de ID válido se o senderId for indefinido
+                _id: senderId ?? 0,
             }}
             inverted={false}
         />

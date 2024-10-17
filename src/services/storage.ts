@@ -1,6 +1,4 @@
-/*import { MMKV } from 'react-native-mmkv'
 
-export const storage = new MMKV({id: 'projeto-integrador'})*/
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const storeData = async (key: string, value: any) => {
@@ -8,7 +6,6 @@ export const storeData = async (key: string, value: any) => {
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem(key, jsonValue);
     } catch (e) {
-      // saving error
     }
 };
 export const getData = async (key: string) => {
@@ -16,7 +13,6 @@ export const getData = async (key: string) => {
       const jsonValue = await AsyncStorage.getItem(key);
       return jsonValue != null ? JSON.parse(jsonValue) : null;
     } catch (e) {
-      // error reading value
     }
   };
 
@@ -24,6 +20,5 @@ export const removeValue = async (key: string) => {
     try {
       await AsyncStorage.removeItem(key)
     } catch(e) {
-      // remove error
     }
   }

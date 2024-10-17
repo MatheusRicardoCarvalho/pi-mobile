@@ -75,3 +75,4 @@ Para rodar o projeto localmente, siga os passos abaixo:
    ```
 
 Certifique-se de ter o ambiente de desenvolvimento configurado corretamente para Android ou iOS, conforme necessário.
+O backend pode ser encontrado em: https://github.com/MatheusRicardoCarvalho/projeto-integrador.git

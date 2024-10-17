@@ -41,7 +41,7 @@ A arquitetura do projeto é baseada em componentes, onde cada parte da interface
 
 ## Rodando o Projeto Localmente
 
-Para rodar o projeto localmente, siga os passos abaixo:
+Observe que algumas funcionalidades podem não estar funcionando no SDK do expo mais recente, para evitar conflitos, execute o projeto na branch `sdk-49` em quanto não corrigimos os problemas de compatibilidade. Para rodar o projeto localmente, siga os passos abaixo:
 
 1. **Clone o repositório**:
    ```bash

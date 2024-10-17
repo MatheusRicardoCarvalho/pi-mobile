@@ -1,6 +1,6 @@
 # Projeto Integrador
 
-Este é um projeto desenvolvido utilizando React Native e Expo, com o objetivo de criar uma aplicação móvel que permite a conexão e interação entre os usuários, **esta implementação tem como objetivo demonstrar as funcionalidades do APP, em futuras atualizações buscaremos melhorar o design**. Abaixo estão as informações sobre as tecnologias utilizadas, a arquitetura do projeto e instruções para rodar o projeto localmente.
+Este é um projeto desenvolvido utilizando React Native e Expo, com o objetivo de criar uma aplicação móvel que permite a conexão e interação entre os usuários, **`esta implementação tem como objetivo demonstrar as funcionalidades do APP, em futuras atualizações buscaremos melhorar o design`**. Abaixo estão as informações sobre as tecnologias utilizadas, a arquitetura do projeto e instruções para rodar o projeto localmente.
 
 ## Tecnologias Utilizadas
 
@@ -60,8 +60,8 @@ Observe que algumas funcionalidades podem não estar funcionando no SDK do expo 
    npm start
    ```
 
-4. **Execute o aplicativo no emulador ou dispositivo**:
-   Altere o baseURL no arquivo src/services/api.ts para corresponder ao endereço em que você está executando o backend
+4. **Endpoint do Backend**:
+   Altere o baseURL no arquivo `src/services/api.ts` para corresponder ao endereço em que você está executando o backend
 
 5. **Execute o aplicativo no emulador ou dispositivo**:
    Para Android:

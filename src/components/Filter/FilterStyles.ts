@@ -9,8 +9,14 @@ export const Container = styled.SafeAreaView`
 `;
 
 export const ScrollContainer = styled.ScrollView`
+    height: 100%;
+    align-self: flex-start;
+    width: 100%;
+`
+export const ContainerMain = styled.View`
     height: 85%;
     align-self: center;
+    width: 100%;
 `
 
 export const Title = styled.Text`

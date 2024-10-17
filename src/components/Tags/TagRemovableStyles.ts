@@ -2,7 +2,7 @@ import { colorPallete } from '../../styleds/colorPallete';
 import styled from 'styled-components/native';
 
 export const TagContainer = styled.View`
-  background-color: ${colorPallete.grey};
+  background-color: ${colorPallete.grey2};
   border-radius: 12px;
   padding: 8px 16px;
   margin: 4px;

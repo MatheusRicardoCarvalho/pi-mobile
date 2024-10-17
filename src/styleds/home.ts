@@ -99,7 +99,7 @@ export const Input = styled.TextInput`
   height: 8%;
   min-height: 32px;
   max-height: 44px;
-  color: ${colorPallete.textWhite};
+  color: ${colorPallete.text};
   border-color: gray;
   border-radius: 8px;
   border-width: 1px;

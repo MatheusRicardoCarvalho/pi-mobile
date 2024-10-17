@@ -9,7 +9,7 @@ import { TagText } from "../../styleds/MyUserProfile";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { api } from "../../services/api";
-import { ButtonTouch } from "../../styleds/home";
+import { ButtonTouch, StyledText } from "../../styleds/home";
 import { FilterUserContext } from "../../context/FilterUserContext";
 import { useNavigation } from "@react-navigation/native";
 import { Text } from "react-native";
@@ -96,7 +96,7 @@ const navigation = useNavigation();
         ): null)}
       </ContainerTags>
       </ScrollViewChooseTags>
-      <ButtonTouch onPress={handleSaveTags}><Text>Salvar</Text></ButtonTouch>
+      <ButtonTouch onPress={handleSaveTags}><StyledText style={{fontSize: 16}}>Salvar</StyledText></ButtonTouch>
     </ShowAndChooseAllTagsContainer>
     </>
   );

@@ -1,11 +1,11 @@
 // FilterUsers.tsx
 import React, { useContext, useEffect, useState } from "react";
-import { Container, Title, FilterOption, Label, RadioGroup, RadioLabel, RangeSlider, CheckboxGroup, ButtonContainer, Button, ScrollContainer } from "./FilterStyles";
+import { Container, Title, FilterOption, Label, RadioGroup, RadioLabel, RangeSlider, CheckboxGroup, ButtonContainer, Button, ScrollContainer, ContainerMain } from "./FilterStyles";
 import { ButtonText, UserButton } from "../FindUsers/UserCardStyles";
 import RadioButtonGroup from "react-native-paper/lib/typescript/components/RadioButton/RadioButtonGroup";
 import { View, Text } from "react-native";
 import { Checkbox, RadioButton } from "react-native-paper";
-import { ButtonTouch, Input } from "../../styleds/home";
+import { ButtonTouch, Input, StyledText } from "../../styleds/home";
 import { navigate } from "../../routes/RootNavigation";
 import { useNavigation } from "@react-navigation/native";
 import { FilterUserContext } from "../../context/FilterUserContext";
@@ -61,8 +61,9 @@ export function FilterUsers() {
 
     return (
         <Container>
+            <ContainerMain>
             <Title>Filtrar Usuários</Title>
-            <ScrollContainer>
+            
                 <FilterOption>
                     <Label>Genero</Label>
                     <RadioGroup>
@@ -115,9 +116,10 @@ export function FilterUsers() {
                     </CheckboxGroup>
                 </FilterOption>
 
+                <ScrollContainer>
                 <FilterOption>
                     <Label>Filtrar por Tags</Label>
-                    <ButtonTouch onPress={() => navigate("ShowAndChooseAllTags", {})}><Text>Escolher Tags</Text></ButtonTouch>
+                    <ButtonTouch onPress={() => navigate("ShowAndChooseAllTags", {})}><StyledText style={{fontSize: 16}}>Escolher Tags</StyledText></ButtonTouch>
                     {selectedTags.length > 0 && selectedTags.map((tag) => (
                         <TagRemovable 
                             tag={tag} 
@@ -128,7 +130,7 @@ export function FilterUsers() {
                 </FilterOption>
 
             </ScrollContainer>
-
+                    </ContainerMain>
             <UserButton onPress={handlerApply}>
                 <ButtonText>Aplicar Filtros</ButtonText>
             </UserButton>

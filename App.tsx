@@ -1,9 +1,8 @@
-import 'react-native-get-random-values';
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
 import * as Font from 'expo-font';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, Feather } from '@expo/vector-icons';
 import * as SplashScreen from 'expo-splash-screen';
 
 import { AuthProvider } from './src/context/AuthContext';
@@ -20,7 +19,10 @@ export default function App() {
     async function prepare() {
       try {
         // Pré-carregue as fontes
-        await Font.loadAsync(Ionicons.font);
+        await Font.loadAsync({
+          ...Ionicons.font,
+          ...Feather.font
+        });
         // Aguarde por outros recursos aqui se necessário
       } catch (e) {
         console.warn(e);

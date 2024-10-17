@@ -10,6 +10,7 @@ export const colorPallete = {
     accent: '#265D80', // Cor de destaque
     detail: '#AA4F4F', // Cor de detalhe
     grey: '#C8BDDA',
+    grey2: '#EBDEFF',
     greyLight: '#666',
     subtleAccent: '#645185', // Acento sutil
     subtleAccent2: '#D5BDFF',
